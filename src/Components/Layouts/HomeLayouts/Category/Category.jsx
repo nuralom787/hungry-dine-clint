@@ -12,11 +12,15 @@ import SectionTitle from '../../SharedLayout/SectionTitle/SectionTitle';
 
 const Category = () => {
     return (
-        <div>
+        <div className='max-w-5xl mx-auto px-2'>
             <SectionTitle heading={'ORDER ONLINE'} subHeading={'---From 11:00am to 10:00pm---'} />
             <Swiper
-                slidesPerView={4}
-                spaceBetween={30}
+                breakpoints={{
+                    425: { slidesPerView: 1, spaceBetween: 10 },
+                    426: { slidesPerView: 2, spaceBetween: 20 },
+                    768: { slidesPerView: 3, spaceBetween: 30 },
+                    1024: { slidesPerView: 4, spaceBetween: 30 },
+                }}
                 pagination={{
                     clickable: true,
                 }}

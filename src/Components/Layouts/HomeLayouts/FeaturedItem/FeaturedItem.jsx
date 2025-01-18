@@ -7,9 +7,9 @@ const FeaturedItem = () => {
         <div className="bg-featured-img bg-fixed bg-cover bg-no-repeat">
             <div className="bg-[#151515B3] py-32 space-y-16">
                 <SectionTitle subHeading={'---Check It Out---'} heading={'from our menu'} space={"my-0"} />
-                <div className='flex justify-center items-center gap-10 max-w-5xl mx-auto px-2'>
-                    <img className='w-3/6' src={featured} alt="" />
-                    <div className='text-start'>
+                <div className='flex flex-col md:flex-row justify-center items-center gap-10 max-w-5xl mx-auto px-2'>
+                    <img className='w-3/4 md:w-3/6' src={featured} alt="" />
+                    <div className='text-center md:text-start'>
                         <h4 className='font-normal font-Inter text-2xl text-white'>
                             March 20, 2023 <br />
                             WHERE CAN I GET SOME?

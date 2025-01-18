@@ -3,6 +3,7 @@ import Category from "../Category/Category";
 import ChefRecommended from "../ChefRecommended/ChefRecommended";
 import FeaturedItem from "../FeaturedItem/FeaturedItem";
 import OurMenu from "../OurMenu/OurMenu";
+import Promo from "../Promo/Promo";
 import Testimonials from "../Testimonials/Testimonials";
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
         <div className="space-y-20">
             <Banner />
             <Category />
+            <Promo />
             <OurMenu />
             <section>
                 <div className="px-4 py-16 md:p-32 bg-black">

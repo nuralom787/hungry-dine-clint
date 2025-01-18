@@ -11,7 +11,8 @@ export default {
         'Inter': '"Inter", serif'
       },
       backgroundImage: {
-        'featured-img': 'url(./src/assets/home/featured.jpg)'
+        'featured-img': 'url(./src/assets/home/featured.jpg)',
+        'promo-img': 'url(./src/assets/home/chef-service.jpg)',
       }
     },
   },
