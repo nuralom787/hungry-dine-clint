@@ -1,10 +1,11 @@
 import featured from '../../../../assets/home/featured.jpg';
 import SectionTitle from '../../SharedLayout/SectionTitle/SectionTitle';
+import './FeaturedItem.css';
 
 
 const FeaturedItem = () => {
     return (
-        <div className="bg-featured-img bg-fixed bg-cover bg-no-repeat">
+        <div className="bg-featured bg-fixed bg-cover bg-no-repeat">
             <div className="bg-[#151515B3] py-32 space-y-16">
                 <SectionTitle subHeading={'---Check It Out---'} heading={'from our menu'} space={"my-0"} />
                 <div className='flex flex-col md:flex-row justify-center items-center gap-10 max-w-5xl mx-auto px-2'>
