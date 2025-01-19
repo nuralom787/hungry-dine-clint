@@ -5,10 +5,14 @@ import FeaturedItem from "../FeaturedItem/FeaturedItem";
 import OurMenu from "../OurMenu/OurMenu";
 import Promo from "../Promo/Promo";
 import Testimonials from "../Testimonials/Testimonials";
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     return (
         <div className="space-y-20">
+            <Helmet>
+                <title>Hungry Dine | Home</title>
+            </Helmet>
             <Banner />
             <Category />
             <Promo />

@@ -22,7 +22,7 @@ const ChefRecommended = () => {
                 {
                     recommended.map(item => <div key={item._id} className="space-y-4 flex flex-col pb-8 bg-[#F3F3F3]">
                         <div className="space-y-4 grow">
-                            <img src={item.image} alt="" />
+                            <img className="w-full" src={item.image} alt="" />
                             <h1 className="font-Inter text-2xl font-semibold text-[#151515] px-5">{item.name}</h1>
                             <p className="font-Inter text-base font-normal text-[#151515] px-5">{item.recipe}</p>
                         </div>
