@@ -14,6 +14,12 @@ const Menus = () => {
     const [menus] = useMenu();
 
 
+    // Scroll To Top.
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth', });
+    }, []);
+
+
     return (
         <section>
             <Helmet>
@@ -22,15 +28,15 @@ const Menus = () => {
             <section className="space-y-20">
                 <Cover bgImage={banner} title={'our menu'} subtitle={'would you like to try a dish?'} />
                 <SectionTitle heading={"TODAY'S OFFER"} subHeading={"---Don't miss---"} />
-                <Menu menus={menus.filter(mn => mn.category === 'offered')} />
+                <Menu title={'dessert'} menus={menus.filter(mn => mn.category === 'offered')} />
                 <Cover bgImage={dessert} title={'desserts'} subtitle={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500.'} />
-                <Menu menus={menus.filter(mn => mn.category === 'dessert')} />
+                <Menu title={'dessert'} menus={menus.filter(mn => mn.category === 'dessert')} />
                 <Cover bgImage={pizza} title={'pizza'} subtitle={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500.'} />
-                <Menu menus={menus.filter(mn => mn.category === 'pizza')} />
+                <Menu title={'pizza'} menus={menus.filter(mn => mn.category === 'pizza')} />
                 <Cover bgImage={salad} title={'salad'} subtitle={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500.'} />
-                <Menu menus={menus.filter(mn => mn.category === 'salad')} />
+                <Menu title={'salad'} menus={menus.filter(mn => mn.category === 'salad')} />
                 <Cover bgImage={soup} title={'soups'} subtitle={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500.'} />
-                <Menu menus={menus.filter(mn => mn.category === 'soup')} />
+                <Menu title={'soup'} menus={menus.filter(mn => mn.category === 'soup')} />
             </section>
         </section>
     );

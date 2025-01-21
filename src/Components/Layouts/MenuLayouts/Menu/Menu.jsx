@@ -1,5 +1,6 @@
+import { Link } from "react-router";
 
-const Menu = ({ menus }) => {
+const Menu = ({ menus, title }) => {
     return (
         <div className="max-w-5xl mx-auto px-2 space-y-20">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -14,7 +15,7 @@ const Menu = ({ menus }) => {
                     </div>)
                 }
             </div>
-            <button className="uppercase w-fit mx-auto font-Inter font-medium text-xl text-[#151515] dark:text-white hover:text-white px-6 py-2 rounded-lg border-b-2 border-[#1F2937] dark:border-white dark:hover:border-[#1F2937] hover:border-b-2 hover:border-[#1F2937] hover:bg-[#1F2937] duration-300">ORDER YOUR FAVORITE FOOD</button>
+            <Link to={`/our-shop/${title}`} className="block uppercase w-fit mx-auto font-Inter font-medium text-xl text-[#151515] dark:text-white hover:text-white px-6 py-2 rounded-lg border-b-2 border-[#1F2937] dark:border-white dark:hover:border-[#1F2937] hover:border-b-2 hover:border-[#1F2937] hover:bg-[#1F2937] duration-300">ORDER YOUR FAVORITE FOOD</Link>
         </div>
     );
 };

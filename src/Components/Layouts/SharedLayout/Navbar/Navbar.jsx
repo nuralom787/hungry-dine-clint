@@ -10,7 +10,7 @@ const Navbar = () => {
         <li><NavLink to={'/contact'} className='font-Inter font-extrabold text-sm'>CONTACT US</NavLink></li>
         <li><NavLink to={'/dashboard'} className='font-Inter font-extrabold text-sm'>DASHBOARD</NavLink></li>
         <li><NavLink to={'/menus'} className='font-Inter font-extrabold text-sm'>OUR MENU</NavLink></li>
-        <li><NavLink to={'/shop'} className='font-Inter font-extrabold text-sm'>OUR SHOP</NavLink></li>
+        <li><NavLink to={'/our-shop'} className='font-Inter font-extrabold text-sm'>OUR SHOP</NavLink></li>
     </>
 
 
