@@ -5,6 +5,8 @@ import Home from './Components/Layouts/HomeLayouts/Home/Home'
 import { HelmetProvider } from 'react-helmet-async'
 import Menus from './Components/Layouts/MenuLayouts/Menus/Menus'
 import OurShop from './Components/Layouts/OurShop/OurShop'
+import Login from './Components/Layouts/Authentications/Login/Login'
+import Register from './Components/Layouts/Authentications/Register/Register'
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
               <Route path='/our-shop' element={<OurShop />}></Route>
               <Route path='/our-shop/:category' element={<OurShop />}></Route>
             </Route>
+            <Route path='/login' element={<Login />}></Route>
+            <Route path='/register' element={<Register />}></Route>
           </Routes>
         </BrowserRouter>
       </HelmetProvider>
