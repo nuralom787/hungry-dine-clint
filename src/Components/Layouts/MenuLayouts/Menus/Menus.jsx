@@ -11,7 +11,7 @@ import Menu from "../Menu/Menu";
 import SectionTitle from "../../SharedLayout/SectionTitle/SectionTitle";
 
 const Menus = () => {
-    const [menus] = useMenu();
+    const [menus, loading] = useMenu();
 
 
     // Scroll To Top.
@@ -28,15 +28,30 @@ const Menus = () => {
             <section className="space-y-20">
                 <Cover bgImage={banner} title={'our menu'} subtitle={'would you like to try a dish?'} />
                 <SectionTitle heading={"TODAY'S OFFER"} subHeading={"---Don't miss---"} />
-                <Menu title={'dessert'} menus={menus.filter(mn => mn.category === 'offered')} />
+                {loading ?
+                    <span className="loading loading-ring loading-lg"></span> :
+                    <Menu title={'dessert'} menus={menus.filter(mn => mn.category === 'offered')} />
+                }
                 <Cover bgImage={dessert} title={'desserts'} subtitle={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500.'} />
-                <Menu title={'dessert'} menus={menus.filter(mn => mn.category === 'dessert')} />
+                {loading ?
+                    <span className="loading loading-ring loading-lg"></span> :
+                    <Menu title={'dessert'} menus={menus.filter(mn => mn.category === 'dessert')} />
+                }
                 <Cover bgImage={pizza} title={'pizza'} subtitle={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500.'} />
-                <Menu title={'pizza'} menus={menus.filter(mn => mn.category === 'pizza')} />
+                {loading ?
+                    <span className="loading loading-ring loading-lg"></span> :
+                    <Menu title={'pizza'} menus={menus.filter(mn => mn.category === 'pizza')} />
+                }
                 <Cover bgImage={salad} title={'salad'} subtitle={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500.'} />
-                <Menu title={'salad'} menus={menus.filter(mn => mn.category === 'salad')} />
+                {loading ?
+                    <span className="loading loading-ring loading-lg"></span> :
+                    <Menu title={'salad'} menus={menus.filter(mn => mn.category === 'salad')} />
+                }
                 <Cover bgImage={soup} title={'soups'} subtitle={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500.'} />
-                <Menu title={'soup'} menus={menus.filter(mn => mn.category === 'soup')} />
+                {loading ?
+                    <span className="loading loading-ring loading-lg"></span> :
+                    <Menu title={'soup'} menus={menus.filter(mn => mn.category === 'soup')} />
+                }
             </section>
         </section>
     );

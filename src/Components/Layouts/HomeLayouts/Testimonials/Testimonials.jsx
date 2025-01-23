@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import SectionTitle from "../../SharedLayout/SectionTitle/SectionTitle";
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FaRegUserCircle } from "react-icons/fa";
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 import 'swiper/css';
@@ -13,7 +12,7 @@ const Testimonials = () => {
 
 
     useEffect(() => {
-        fetch('reviews.json')
+        fetch('http://localhost:5000/reviews')
             .then(res => res.json())
             .then(data => {
                 setReviews(data);
@@ -34,7 +33,7 @@ const Testimonials = () => {
                                     value={review.rating}
                                     readOnly
                                 />
-                                <FaRegUserCircle className="mx-auto text-9xl" />
+                                <img className="mx-auto w-32 rounded-full" src={review.image} alt="" />
                                 <p className="font-normal font-Inter text-xl text-[#444444] dark:text-white">{review.details}</p>
                                 <h1 className="font-medium font-Inter text-3xl text-[#CD9003] uppercase">{review.name}</h1>
                             </div>
