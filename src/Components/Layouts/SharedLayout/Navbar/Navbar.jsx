@@ -1,16 +1,28 @@
-import { Link, NavLink } from 'react-router';
 import './Navbar.css';
-import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { Link, NavLink } from 'react-router';
+import { useContext, useEffect, useState } from 'react';
+import { RiShoppingCartLine, RiUser3Line } from "react-icons/ri";
+import { AuthContext } from '../../../../Providers/AuthProvider';
 
 const Navbar = () => {
     const [theme, setTheme] = useState(localStorage.getItem('theme'));
+    const { user, LogoutUser } = useContext(AuthContext);
 
     const navLinks = <>
-        <li><NavLink to={'/'} className='font-Inter font-extrabold text-sm'>HOME</NavLink></li>
-        <li><NavLink to={'/contact'} className='font-Inter font-extrabold text-sm'>CONTACT US</NavLink></li>
-        <li><NavLink to={'/dashboard'} className='font-Inter font-extrabold text-sm'>DASHBOARD</NavLink></li>
-        <li><NavLink to={'/menus'} className='font-Inter font-extrabold text-sm'>OUR MENU</NavLink></li>
-        <li><NavLink to={'/our-shop'} className='font-Inter font-extrabold text-sm'>OUR SHOP</NavLink></li>
+        <li><NavLink to={'/'} className='font-Inter font-bold text-lg'>HOME</NavLink></li>
+        <li><NavLink to={'/contact'} className='font-Inter font-bold text-lg'>CONTACT US</NavLink></li>
+        <li><NavLink to={'/dashboard'} className='font-Inter font-bold text-lg'>DASHBOARD</NavLink></li>
+        <li><NavLink to={'/menus'} className='font-Inter font-bold text-lg'>OUR MENU</NavLink></li>
+        <li><NavLink to={'/our-shop'} className='font-Inter font-bold text-lg'>OUR SHOP</NavLink></li>
+        <li>
+            <NavLink to={'/cart'} className='font-Inter font-bold text-lg'>
+                <div className='relative'>
+                    <RiShoppingCartLine className='text-4xl' />
+                    <span className='bg-red-600 font-Inter text-sm text-white absolute -top-1 -right-2 px-2 py-[2px] rounded-full'>8</span>
+                </div>
+            </NavLink>
+        </li>
     </>
 
 
@@ -38,10 +50,30 @@ const Navbar = () => {
     }, [theme]);
 
 
+
+    // Handle Logout.
+    const handleLogout = () => {
+        LogoutUser()
+            .then(result => {
+                toast.info('Logout Successfully', {
+                    position: 'top-center',
+                    autoClose: 2500
+                })
+            })
+            .catch(err => {
+                toast.error(err.message, {
+                    position: 'top-center',
+                    autoClose: 5000
+                });
+            })
+    };
+
+
+
     return (
         <div className='relative'>
             <div className="navbar bg-base-100 bg-opacity-20 py-4 absolute z-10 text-white">
-                <div className="navbar-start">
+                <div className="navbar-start w-fit">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                             <svg
@@ -63,11 +95,10 @@ const Navbar = () => {
                     </div>
                     <h1 className="text-2xl font-extrabold">Hungry Dine</h1>
                 </div>
-                <div className="navbar-end gap-6 font-bold">
+                <div className="navbar-end gap-6 font-bold grow">
                     <ul className="hidden lg:flex justify-between items-center gap-6">
                         {navLinks}
                     </ul>
-                    {/* <input onClick={handleTheme} type="checkbox" className="toggle border-gray-800 bg-gray-500 [--tglbg:#15151566]" /> */}
                     <label title='Change Theme' className="grid cursor-pointer place-items-center">
                         <input
                             title='Change Theme'
@@ -106,7 +137,14 @@ const Navbar = () => {
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                         </svg>
                     </label>
-                    <Link to={'/login'}>SIGN-IN</Link>
+                    {user ?
+                        <div className='flex items-center gap-6'>
+                            <button onClick={handleLogout} className='font-Inter font-bold text-lg'>LOGOUT</button>
+                            <Link to={'/'} data-tip="Profile" className='block tooltip lg:tooltip lg:tooltip-bottom bg-white rounded-full p-2 cursor-pointer'><RiUser3Line className='text-2xl text-green-700' /></Link>
+                        </div>
+                        :
+                        <Link to={'/login'} className='font-Inter font-bold text-lg'>SIGN-IN</Link>
+                    }
                 </div>
             </div>
         </div>

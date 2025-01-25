@@ -6,3 +6,8 @@ ul li a {
 ul li .active {
     color: #EEFF25;
 }
+
+.tooltip {
+    --tooltip-color: #151515;
+    --tooltip-text-color: white;
+}
