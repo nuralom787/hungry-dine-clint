@@ -4,11 +4,21 @@ import Cover from "../SharedLayout/Cover/Cover";
 import shopImg from '../../../assets/shop/banner2.jpg';
 import useMenu from "../../../Hooks/useMenu";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { useEffect, useState } from "react";
-import { useParams } from 'react-router';
+import { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from 'react-router';
 import { Helmet } from 'react-helmet-async';
+import { AuthContext } from '../../../Providers/AuthProvider';
+import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import useCart from '../../../Hooks/useCart';
 
 const OurShop = () => {
+    const axiosSecure = useAxiosSecure();
+    const { user } = useContext(AuthContext);
+    const [cart, refetch] = useCart();
+    const navigate = useNavigate();
+    const location = useLocation();
     const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks'];
     const { category } = useParams();
     const initialIndex = categories.indexOf(category || 'salad')
@@ -25,6 +35,56 @@ const OurShop = () => {
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth', });
     }, []);
+
+
+
+    // Handle Add To Cart Item.
+    const handleAddToCart = (item) => {
+        const { _id, name, image, price } = item;
+
+        if (user) {
+            // console.log(item._id, user?.email)
+            const cartItem = {
+                email: user.email,
+                menuId: _id,
+                price,
+                name,
+                image,
+            }
+            axiosSecure.post('/carts', cartItem)
+                .then(res => {
+                    // console.log(res.data);
+                    if (res.data.insertedId) {
+                        toast.success(`${name} Add To Cart Successfully`, {
+                            position: 'top-center',
+                            autoClose: 2500
+                        });
+                        // Update Cart Length.
+                        refetch();
+                    }
+                })
+                .catch(err => {
+                    toast.error(err.message)
+                })
+        }
+        else {
+            Swal.fire({
+                title: "Your Are Not Logged-In",
+                text: "Please Login Your Account",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Login"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login', { state: { from: location } });
+                }
+            });
+        }
+    }
+
+
 
 
     return (
@@ -58,7 +118,7 @@ const OurShop = () => {
                                                 <h1 className="font-Inter text-2xl font-semibold text-[#151515] px-5">{item.name}</h1>
                                                 <p className="font-Inter text-base font-normal text-[#151515] px-5">{item.recipe}</p>
                                             </div>
-                                            <button className="uppercase w-fit mx-auto font-Inter font-medium text-xl text-[#BB8506] px-6 py-2 rounded-lg border-b-2 border-[#BB8506] hover:border-b-2 hover:border-[#1F2937] bg-[#F3F3F3] hover:bg-[#1F2937] duration-300">Add To Cart</button>
+                                            <button onClick={() => handleAddToCart(item)} className="uppercase w-fit mx-auto font-Inter font-medium text-xl text-[#BB8506] px-6 py-2 rounded-lg border-b-2 border-[#BB8506] hover:border-b-2 hover:border-[#1F2937] bg-[#F3F3F3] hover:bg-[#1F2937] duration-300">Add To Cart</button>
                                         </div>)
                                     }
                                 </div>
@@ -75,7 +135,7 @@ const OurShop = () => {
                                                 <h1 className="font-Inter text-2xl font-semibold text-[#151515] px-5">{item.name}</h1>
                                                 <p className="font-Inter text-base font-normal text-[#151515] px-5">{item.recipe}</p>
                                             </div>
-                                            <button className="uppercase w-fit mx-auto font-Inter font-medium text-xl text-[#BB8506] px-6 py-2 rounded-lg border-b-2 border-[#BB8506] hover:border-b-2 hover:border-[#1F2937] bg-[#F3F3F3] hover:bg-[#1F2937] duration-300">Add To Cart</button>
+                                            <button onClick={() => handleAddToCart(item)} className="uppercase w-fit mx-auto font-Inter font-medium text-xl text-[#BB8506] px-6 py-2 rounded-lg border-b-2 border-[#BB8506] hover:border-b-2 hover:border-[#1F2937] bg-[#F3F3F3] hover:bg-[#1F2937] duration-300">Add To Cart</button>
                                         </div>)
                                     }
                                 </div>
@@ -92,7 +152,7 @@ const OurShop = () => {
                                                 <h1 className="font-Inter text-2xl font-semibold text-[#151515] px-5">{item.name}</h1>
                                                 <p className="font-Inter text-base font-normal text-[#151515] px-5">{item.recipe}</p>
                                             </div>
-                                            <button className="uppercase w-fit mx-auto font-Inter font-medium text-xl text-[#BB8506] px-6 py-2 rounded-lg border-b-2 border-[#BB8506] hover:border-b-2 hover:border-[#1F2937] bg-[#F3F3F3] hover:bg-[#1F2937] duration-300">Add To Cart</button>
+                                            <button onClick={() => handleAddToCart(item)} className="uppercase w-fit mx-auto font-Inter font-medium text-xl text-[#BB8506] px-6 py-2 rounded-lg border-b-2 border-[#BB8506] hover:border-b-2 hover:border-[#1F2937] bg-[#F3F3F3] hover:bg-[#1F2937] duration-300">Add To Cart</button>
                                         </div>)
                                     }
                                 </div>
@@ -109,7 +169,7 @@ const OurShop = () => {
                                                 <h1 className="font-Inter text-2xl font-semibold text-[#151515] px-5">{item.name}</h1>
                                                 <p className="font-Inter text-base font-normal text-[#151515] px-5">{item.recipe}</p>
                                             </div>
-                                            <button className="uppercase w-fit mx-auto font-Inter font-medium text-xl text-[#BB8506] px-6 py-2 rounded-lg border-b-2 border-[#BB8506] hover:border-b-2 hover:border-[#1F2937] bg-[#F3F3F3] hover:bg-[#1F2937] duration-300">Add To Cart</button>
+                                            <button onClick={() => handleAddToCart(item)} className="uppercase w-fit mx-auto font-Inter font-medium text-xl text-[#BB8506] px-6 py-2 rounded-lg border-b-2 border-[#BB8506] hover:border-b-2 hover:border-[#1F2937] bg-[#F3F3F3] hover:bg-[#1F2937] duration-300">Add To Cart</button>
                                         </div>)
                                     }
                                 </div>
@@ -126,7 +186,7 @@ const OurShop = () => {
                                                 <h1 className="font-Inter text-2xl font-semibold text-[#151515] px-5">{item.name}</h1>
                                                 <p className="font-Inter text-base font-normal text-[#151515] px-5">{item.recipe}</p>
                                             </div>
-                                            <button className="uppercase w-fit mx-auto font-Inter font-medium text-xl text-[#BB8506] px-6 py-2 rounded-lg border-b-2 border-[#BB8506] hover:border-b-2 hover:border-[#1F2937] bg-[#F3F3F3] hover:bg-[#1F2937] duration-300">Add To Cart</button>
+                                            <button onClick={() => handleAddToCart(item)} className="uppercase w-fit mx-auto font-Inter font-medium text-xl text-[#BB8506] px-6 py-2 rounded-lg border-b-2 border-[#BB8506] hover:border-b-2 hover:border-[#1F2937] bg-[#F3F3F3] hover:bg-[#1F2937] duration-300">Add To Cart</button>
                                         </div>)
                                     }
                                 </div>

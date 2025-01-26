@@ -4,11 +4,15 @@ import { Link, NavLink } from 'react-router';
 import { useContext, useEffect, useState } from 'react';
 import { RiShoppingCartLine, RiUser3Line } from "react-icons/ri";
 import { AuthContext } from '../../../../Providers/AuthProvider';
+import useCart from '../../../../Hooks/useCart';
 
 const Navbar = () => {
     const [theme, setTheme] = useState(localStorage.getItem('theme'));
     const { user, LogoutUser } = useContext(AuthContext);
+    const [cart] = useCart();
 
+
+    // NavLinks
     const navLinks = <>
         <li><NavLink to={'/'} className='font-Inter font-bold text-lg'>HOME</NavLink></li>
         <li><NavLink to={'/contact'} className='font-Inter font-bold text-lg'>CONTACT US</NavLink></li>
@@ -19,7 +23,7 @@ const Navbar = () => {
             <NavLink to={'/cart'} className='font-Inter font-bold text-lg'>
                 <div className='relative'>
                     <RiShoppingCartLine className='text-4xl' />
-                    <span className='bg-red-600 font-Inter text-sm text-white absolute -top-1 -right-2 px-2 py-[2px] rounded-full'>8</span>
+                    <span className='bg-red-600 font-Inter text-sm text-white absolute -top-1 -right-2 px-2 py-[2px] rounded-full'>{cart.length}</span>
                 </div>
             </NavLink>
         </li>
