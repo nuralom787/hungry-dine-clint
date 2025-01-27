@@ -11,6 +11,7 @@ import Login from './Components/Layouts/Authentications/Login/Login'
 import Register from './Components/Layouts/Authentications/Register/Register'
 import AuthProvider from './Providers/AuthProvider'
 import PrivetRoute from './PrivetRoute/PrivetRoute'
+import Cart from './Components/Layouts/Cart/Cart';
 
 function App() {
   const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ function App() {
                   <Route path='/menus' element={<PrivetRoute><Menus /></PrivetRoute>}></Route>
                   <Route path='/our-shop' element={<OurShop />}></Route>
                   <Route path='/our-shop/:category' element={<OurShop />}></Route>
+                  <Route path='/cart' element={<Cart />}></Route>
                 </Route>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/register' element={<Register />}></Route>
