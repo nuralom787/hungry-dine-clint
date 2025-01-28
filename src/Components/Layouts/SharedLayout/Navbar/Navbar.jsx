@@ -16,11 +16,11 @@ const Navbar = () => {
     const navLinks = <>
         <li><NavLink to={'/'} className='font-Inter font-bold text-lg'>HOME</NavLink></li>
         <li><NavLink to={'/contact'} className='font-Inter font-bold text-lg'>CONTACT US</NavLink></li>
-        <li><NavLink to={'/dashboard'} className='font-Inter font-bold text-lg'>DASHBOARD</NavLink></li>
+        <li><NavLink to={'/dashboard/home'} className='font-Inter font-bold text-lg'>DASHBOARD</NavLink></li>
         <li><NavLink to={'/menus'} className='font-Inter font-bold text-lg'>OUR MENU</NavLink></li>
         <li><NavLink to={'/our-shop'} className='font-Inter font-bold text-lg'>OUR SHOP</NavLink></li>
         <li>
-            <Link to={'/cart'} className='font-Inter font-bold text-lg'>
+            <Link to={'/dashboard/cart'} className='font-Inter font-bold text-lg'>
                 <div className='relative'>
                     <RiShoppingCartLine className='text-4xl' />
                     <span className='bg-red-600 font-Inter text-sm text-white absolute -top-1 -right-2 px-2 py-[2px] rounded-full'>{cart.length}</span>

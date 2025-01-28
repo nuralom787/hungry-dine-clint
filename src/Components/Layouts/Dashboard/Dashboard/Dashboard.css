@@ -1,0 +1,12 @@
+.dashboard li a {
+    color: #151515;
+}
+
+.dashboard li .active {
+    color: #FFFFFF;
+}
+
+.tooltip {
+    --tooltip-color: #151515;
+    --tooltip-text-color: white;
+}
