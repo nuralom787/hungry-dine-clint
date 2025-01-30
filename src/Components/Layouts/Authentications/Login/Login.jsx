@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
     const currentTheme = localStorage.getItem('theme');
-    const { LoginUser } = useContext(AuthContext);
+    const { LoginUser, GoogleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     // console.log(location);
@@ -18,13 +18,13 @@ const Login = () => {
 
     const from = location.state?.from?.pathname || '/';
 
-
+    // Captcha Engine.
     useEffect(() => {
         loadCaptchaEnginge(6)
     }, []);
 
 
-
+    // Handle Login With Email/Pass Function.
     const handleLogin = e => {
         e.preventDefault();
 
@@ -59,6 +59,23 @@ const Login = () => {
             })
         }
     };
+
+
+    // Handle Login With Google Function.
+    const handleGoogleLogin = () => {
+        GoogleLogin()
+            .then(result => {
+                navigate(from, { replace: true });
+                toast.success('User Login Successfully', {
+                    position: 'top-right',
+                    autoClose: 2500
+                })
+                // console.log(result.user);
+            })
+            .catch(err => {
+                toast.error(err.message);
+            })
+    }
 
 
     return (
@@ -100,10 +117,10 @@ const Login = () => {
                             </form>
                             <div className="text-center space-y-3">
                                 <p className="font-Inter text-base font-medium text-[#D1A054]">New Here? <Link to={'/register'} className="font-bold hover:underline">Create a New Account</Link></p>
-                                <p className={`font-Inter font-medium ${currentTheme === 'light' ? 'text-[#151515]' : 'text-white'}`}>Or Login With</p>
+                                <div className="divider dark:before:bg-white dark:after:bg-white dark:text-[#D1A054] font-Inter font-bold text-sm">Or Continue With</div>
                                 <div className="flex justify-center items-center gap-10">
                                     <button className={`border-2 border-[#444444] ${currentTheme === 'dark' && 'border-white'} rounded-full p-3`}><FaFacebookF className={`text-2xl  ${currentTheme === 'light' ? 'text-[#444444]' : 'text-white'}`} /></button>
-                                    <button className={`border-2 border-[#444444] ${currentTheme === 'dark' && 'border-white'} rounded-full p-3`}><FaGoogle className={`text-2xl  ${currentTheme === 'light' ? 'text-[#444444]' : 'text-white'}`} /></button>
+                                    <button onClick={handleGoogleLogin} className={`border-2 border-[#444444] ${currentTheme === 'dark' && 'border-white'} rounded-full p-3`}><FaGoogle className={`text-2xl  ${currentTheme === 'light' ? 'text-[#444444]' : 'text-white'}`} /></button>
                                     <button className={`border-2 border-[#444444] ${currentTheme === 'dark' && 'border-white'} rounded-full p-3`}><FaGithub className={`text-2xl  ${currentTheme === 'light' ? 'text-[#444444]' : 'text-white'}`} /></button>
                                 </div>
                             </div>

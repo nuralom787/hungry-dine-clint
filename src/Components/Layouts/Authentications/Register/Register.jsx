@@ -8,13 +8,15 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import { useForm } from "react-hook-form"
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 
 const Register = () => {
     // HookForm.
     const { register, handleSubmit, watch, formState: { errors }, } = useForm()
-    const currentTheme = localStorage.getItem('theme');
     const { CreateUser, UpdateUserInfo } = useContext(AuthContext);
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
+    const currentTheme = localStorage.getItem('theme');
 
     // Captcha Code.
     useEffect(() => {
@@ -27,17 +29,27 @@ const Register = () => {
         if (validateCaptcha(data.captcha, false)) {
             CreateUser(data.email, data.password)
                 .then(result => {
-                    // const user = result.user;
                     const info = { name: data.name }
                     UpdateUserInfo(info)
                         .then(() => {
-                            // console.log('User Profile Updated Successfully')
-                            navigate('/');
-                            toast.success('New User Created Successfully', {
-                                position: 'top-center',
-                                autoClose: 2500
-                            })
-                            // console.log(user);
+                            const userInfo = {
+                                name: data.name,
+                                email: data.email
+                            };
+                            axiosPublic.post('/users', userInfo)
+                                .then(res => {
+                                    console.log(res.data);
+                                    if (res.data.insertedId) {
+                                        toast.success('New User Created Successfully', {
+                                            position: 'top-center',
+                                            autoClose: 2500
+                                        })
+                                        navigate('/');
+                                    }
+                                })
+                                .catch(err => {
+                                    console.log(err.message);
+                                })
                         })
                         .catch(err => {
                             toast.error(err.message, {

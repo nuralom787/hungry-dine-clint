@@ -1,15 +1,51 @@
 import { Helmet } from "react-helmet-async";
 import useCart from "../../../Hooks/useCart";
 import { IoIosArrowDown } from "react-icons/io";
-import { FaArrowRight } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import { FaArrowRight, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router";
 import './Cart.css';
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 
 const Cart = () => {
     const [cart, refetch, isPending] = useCart();
+    const axiosSecure = useAxiosSecure();
     const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+
+
+    // Handle Item Delete.
+    const handleDelete = (id) => {
+        // console.log(id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "If you delete it, you can't revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/carts/${id}`)
+                    .then(res => {
+                        // console.log(res.data);
+                        if (res.data.deletedCount) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Item Deleted Successfully.",
+                                icon: "success"
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err.message);
+                    })
+            }
+        });
+    };
+
 
     return (
         <section className="px-10 bg-gray-300 dark:bg-base-300">
@@ -49,7 +85,7 @@ const Cart = () => {
                                         <td className="font-Inter font-semibold text-[#151515] dark:text-white"><img className="w-20 rounded-lg" src={item.image} alt="" /></td>
                                         <td className="font-Inter font-semibold text-[#151515] dark:text-white"><Link className="hover:underline" to={'/'}><h1>{item.name}</h1></Link></td>
                                         <td className="font-Inter font-semibold text-[#151515] dark:text-white"><p>${item.price.toFixed(2)}</p></td>
-                                        <td className="font-Inter font-semibold text-[#151515] dark:text-white"><button className="bg-red-600 p-2 rounded-md"><MdDelete className="text-white text-2xl" /></button></td>
+                                        <td className="font-Inter font-semibold text-[#151515] dark:text-white"><button onClick={() => handleDelete(item._id)} className="bg-red-600 p-2 rounded-md"><FaTrashAlt className="text-white text-2xl" /></button></td>
                                     </tr>)
                                 }
                             </tbody>
