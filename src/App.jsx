@@ -19,6 +19,11 @@ import PaymentHistory from './Components/Layouts/Dashboard/PaymentHistory/Paymen
 import Review from './Components/Layouts/Dashboard/Review/Review';
 import Bookings from './Components/Layouts/Dashboard/Bookings/Bookings';
 import { useEffect } from 'react';
+import AdminHome from './Components/Layouts/Dashboard/AdminHome/AdminHome';
+import AddItem from './Components/Layouts/Dashboard/AddItem/AddItem';
+import ManageItem from './Components/Layouts/Dashboard/ManageItem/ManageItem';
+import ManageBooking from './Components/Layouts/Dashboard/ManageBooking/ManageBooking';
+import AllUsers from './Components/Layouts/Dashboard/AllUsers/AllUsers';
 
 function App() {
   const queryClient = new QueryClient();
@@ -52,6 +57,11 @@ function App() {
                   <Route path='/our-shop/:category' element={<OurShop />}></Route>
                 </Route>
                 <Route path='/dashboard' element={<PrivetRoute><Dashboard /></PrivetRoute>}>
+                  <Route path='/dashboard/admin-home' element={<PrivetRoute><AdminHome /></PrivetRoute>}></Route>
+                  <Route path='/dashboard/add-item' element={<PrivetRoute><AddItem /></PrivetRoute>}></Route>
+                  <Route path='/dashboard/manage-item' element={<PrivetRoute><ManageItem /></PrivetRoute>}></Route>
+                  <Route path='/dashboard/manage-booking' element={<PrivetRoute><ManageBooking /></PrivetRoute>}></Route>
+                  <Route path='/dashboard/all-users' element={<PrivetRoute><AllUsers /></PrivetRoute>}></Route>
                   <Route path='/dashboard/home' element={<PrivetRoute><DashboardHome /></PrivetRoute>}></Route>
                   <Route path='/dashboard/reservation' element={<PrivetRoute><Reservation /></PrivetRoute>}></Route>
                   <Route path='/dashboard/payment-history' element={<PrivetRoute><PaymentHistory /></PrivetRoute>}></Route>

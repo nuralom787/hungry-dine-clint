@@ -48,7 +48,7 @@ const Cart = () => {
 
 
     return (
-        <section className="px-10 bg-gray-300 dark:bg-base-300">
+        <section className="min-h-screen px-10 bg-gray-300 dark:bg-base-300">
             <Helmet>
                 <title>Hungry Dine | Cart</title>
             </Helmet>

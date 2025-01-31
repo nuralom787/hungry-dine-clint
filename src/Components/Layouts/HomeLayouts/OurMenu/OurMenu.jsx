@@ -7,7 +7,7 @@ const OurMenu = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/menus')
+        fetch('https://hungry-dine.vercel.app/menus')
             .then(res => res.json())
             .then(data => {
                 const filterData = data.filter(dt => dt.category === 'popular');

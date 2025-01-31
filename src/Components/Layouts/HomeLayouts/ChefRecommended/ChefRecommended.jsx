@@ -17,7 +17,7 @@ const ChefRecommended = () => {
 
     // Load Menus Data.
     useEffect(() => {
-        fetch("http://localhost:5000/menus")
+        fetch("https://hungry-dine.vercel.app/menus")
             .then(res => res.json())
             .then(data => {
                 const sort = data.slice(0, 3);
