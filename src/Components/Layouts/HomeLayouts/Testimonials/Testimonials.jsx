@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import SectionTitle from "../../SharedLayout/SectionTitle/SectionTitle";
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -6,18 +5,10 @@ import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 import 'swiper/css';
 import 'swiper/css/navigation';
+import useReviews from "../../../../Hooks/useReviews";
 
 const Testimonials = () => {
-    const [reviews, setReviews] = useState([]);
-
-
-    useEffect(() => {
-        fetch('https://hungry-dine.vercel.app/reviews')
-            .then(res => res.json())
-            .then(data => {
-                setReviews(data);
-            })
-    }, []);
+    const [reviews] = useReviews();
 
 
     return (

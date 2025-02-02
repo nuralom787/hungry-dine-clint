@@ -54,8 +54,9 @@ const AllUsers = () => {
 
     // Update User Role.
     const updateRole = (e, role = 'User', id) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         const newRole = e.target.value;
+
         Swal.fire({
             title: "Are you sure?",
             text: `Do you want to update this user role from ${role} to ${newRole}?`,

@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
+import useAxiosPublic from "./useAxiosPublic";
 
 const useMenu = () => {
     const [menus, setMenus] = useState([]);
     const [loading, setLoading] = useState(true);
+    const axiosPublic = useAxiosPublic();
 
     useEffect(() => {
-        fetch('https://hungry-dine.vercel.app/menus')
-            .then(res => res.json())
-            .then(data => {
-                setMenus(data);
+        axiosPublic.get('/menus')
+            .then(res => {
+                setMenus(res.data);
                 setLoading(false);
+            })
+            .catch(err => {
+                // console.log(err.message);
             })
     }, []);
 

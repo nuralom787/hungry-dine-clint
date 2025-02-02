@@ -1,19 +1,10 @@
-import { useEffect, useState } from "react";
 import SectionTitle from "../../SharedLayout/SectionTitle/SectionTitle";
 import MenuItem from "../../SharedLayout/MenuItem/MenuItem";
+import useMenu from "../../../../Hooks/useMenu";
 
 const OurMenu = () => {
-    const [menuData, setMenuData] = useState([]);
-
-
-    useEffect(() => {
-        fetch('https://hungry-dine.vercel.app/menus')
-            .then(res => res.json())
-            .then(data => {
-                const filterData = data.filter(dt => dt.category === 'popular');
-                setMenuData(filterData)
-            })
-    }, []);
+    const [menus] = useMenu();
+    const filterData = menus.filter(dt => dt.category === 'popular');
 
 
     return (
@@ -21,7 +12,7 @@ const OurMenu = () => {
             <SectionTitle heading={'FROM OUR MENU'} subHeading={'---Check It Out---'} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {
-                    menuData.map(item => <MenuItem
+                    filterData.map(item => <MenuItem
                         key={item._id}
                         item={item}
                     ></MenuItem>)
