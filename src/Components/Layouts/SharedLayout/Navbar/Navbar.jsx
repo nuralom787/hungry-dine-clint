@@ -5,18 +5,26 @@ import { useContext, useEffect, useState } from 'react';
 import { RiShoppingCartLine, RiUser3Line } from "react-icons/ri";
 import { AuthContext } from '../../../../Providers/AuthProvider';
 import useCart from '../../../../Hooks/useCart';
+import useAdmin from '../../../../Hooks/useAdmin';
 
 const Navbar = () => {
     const [theme, setTheme] = useState(localStorage.getItem('theme'));
     const { user, LogoutUser } = useContext(AuthContext);
     const [cart] = useCart();
+    const [isAdmin] = useAdmin();
 
 
     // NavLinks
     const navLinks = <>
         <li><NavLink to={'/'} className='font-Inter font-bold text-lg'>HOME</NavLink></li>
         <li><NavLink to={'/contact'} className='font-Inter font-bold text-lg'>CONTACT US</NavLink></li>
-        <li><NavLink to={'/dashboard/home'} className='font-Inter font-bold text-lg'>DASHBOARD</NavLink></li>
+        <li>
+            {isAdmin ?
+                <NavLink to={'/dashboard/admin-home'} className='font-Inter font-bold text-lg'>DASHBOARD</NavLink>
+                :
+                <NavLink to={'/dashboard/home'} className='font-Inter font-bold text-lg'>DASHBOARD</NavLink>
+            }
+        </li>
         <li><NavLink to={'/menus'} className='font-Inter font-bold text-lg'>OUR MENU</NavLink></li>
         <li><NavLink to={'/our-shop'} className='font-Inter font-bold text-lg'>OUR SHOP</NavLink></li>
         <li>

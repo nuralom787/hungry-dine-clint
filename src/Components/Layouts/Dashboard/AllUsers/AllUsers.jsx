@@ -5,9 +5,12 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { Helmet } from 'react-helmet-async';
 import profile from '../../../../assets/others/profile.png';
 import Swal from 'sweetalert2';
+import { useContext } from 'react';
+import { AuthContext } from '../../../../Providers/AuthProvider';
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
+    const { user } = useContext(AuthContext);
 
 
     // Load Data
@@ -18,6 +21,9 @@ const AllUsers = () => {
             return res.data
         }
     });
+
+
+    const filteredUser = users.filter(fUser => fUser.email !== user.email);
 
 
     // Delete User Function.
@@ -119,14 +125,14 @@ const AllUsers = () => {
                             </thead>
                             <tbody>
                                 {
-                                    users.map((user, idx) => <tr key={user._id} className="border-t border-b-base-300 dark:border-b-white my-6">
+                                    filteredUser.map((user, idx) => <tr key={user._id} className="border-t border-b-base-300 dark:border-b-white my-6">
                                         <th className="font-Inter font-semibold text-[#151515] dark:text-white"><p>{idx + 1}</p></th>
                                         <td className="font-Inter font-semibold text-[#151515] dark:text-white"><img className="w-14 rounded-full" src={user?.image || profile} alt="" /></td>
                                         <td className="font-Inter font-semibold text-[#151515] dark:text-white uppercase"><p>{user?.name}</p></td>
                                         <td className="font-Inter font-semibold text-[#151515] dark:text-white"><p>{user?.email}</p></td>
                                         <td className="font-Inter font-semibold text-[#151515] dark:text-white">
                                             <select onChange={() => updateRole(event, user.role, user._id)} name="role" id="role" className='uppercase bg-gray-100 dark:bg-gray-800 p-1 border border-gray-300 dark:border-gray-500 dark:focus:border-gray-100 focus:border-gray-500 outline-0 text-sm rounded-md items-center'>
-                                                <option defaultValue={user?.role} hidden>{user?.role}</option>
+                                                <option defaultValue={user?.role} hidden>{user?.role || 'user'}</option>
                                                 <option value="admin" hidden={user.role === 'admin' && true}>ADMIN</option>
                                                 <option value="moderator" hidden={user.role === 'moderator' && true}>MODERATOR</option>
                                                 <option value="user" hidden={user.role === 'user' && true}>USER</option>

@@ -1,10 +1,16 @@
 import axios from "axios";
+import { useContext } from "react";
+import { useNavigate } from "react-router";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const axiosSecure = axios.create({
-    baseURL: 'https://hungry-dine.vercel.app'
+    baseURL: 'http://localhost:5000'
 });
 
 const useAxiosSecure = () => {
+    const navigate = useNavigate();
+    const { LogoutUser } = useContext(AuthContext);
+
     // Request Interceptor
     axiosSecure.interceptors.request.use(function (config) {
         // console.log("stop by axios interceptor", token);
@@ -18,10 +24,15 @@ const useAxiosSecure = () => {
 
 
     // Response Interceptor
-    axios.interceptors.response.use(function (response) {
+    axiosSecure.interceptors.response.use(function (response) {
         return response
-    }, function (err) {
+    }, async (err) => {
+        // console.log(err.response);
         const status = err.response.status;
+        if (status === 401 || status === 403) {
+            await LogoutUser();
+            navigate('/login')
+        }
         return Promise.reject(err);
     });
 
