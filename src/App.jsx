@@ -24,6 +24,7 @@ import AddItem from './Components/Layouts/Dashboard/AddItem/AddItem';
 import ManageItem from './Components/Layouts/Dashboard/ManageItem/ManageItem';
 import ManageBooking from './Components/Layouts/Dashboard/ManageBooking/ManageBooking';
 import AllUsers from './Components/Layouts/Dashboard/AllUsers/AllUsers';
+import AdminRoute from './AdminRoute/AdminRoute';
 
 function App() {
   const queryClient = new QueryClient();
@@ -57,11 +58,11 @@ function App() {
                   <Route path='/our-shop/:category' element={<OurShop />}></Route>
                 </Route>
                 <Route path='/dashboard' element={<PrivetRoute><Dashboard /></PrivetRoute>}>
-                  <Route path='/dashboard/admin-home' element={<PrivetRoute><AdminHome /></PrivetRoute>}></Route>
-                  <Route path='/dashboard/add-item' element={<PrivetRoute><AddItem /></PrivetRoute>}></Route>
-                  <Route path='/dashboard/manage-item' element={<PrivetRoute><ManageItem /></PrivetRoute>}></Route>
-                  <Route path='/dashboard/manage-booking' element={<PrivetRoute><ManageBooking /></PrivetRoute>}></Route>
-                  <Route path='/dashboard/all-users' element={<PrivetRoute><AllUsers /></PrivetRoute>}></Route>
+                  <Route path='/dashboard/admin-home' element={<AdminRoute><AdminHome /></AdminRoute>}></Route>
+                  <Route path='/dashboard/add-item' element={<AdminRoute><AddItem /></AdminRoute>}></Route>
+                  <Route path='/dashboard/manage-item' element={<AdminRoute><ManageItem /></AdminRoute>}></Route>
+                  <Route path='/dashboard/manage-booking' element={<AdminRoute><ManageBooking /></AdminRoute>}></Route>
+                  <Route path='/dashboard/all-users' element={<AdminRoute><AllUsers /></AdminRoute>}></Route>
                   <Route path='/dashboard/home' element={<PrivetRoute><DashboardHome /></PrivetRoute>}></Route>
                   <Route path='/dashboard/reservation' element={<PrivetRoute><Reservation /></PrivetRoute>}></Route>
                   <Route path='/dashboard/payment-history' element={<PrivetRoute><PaymentHistory /></PrivetRoute>}></Route>
