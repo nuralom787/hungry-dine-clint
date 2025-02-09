@@ -53,7 +53,7 @@ function App() {
               <Routes>
                 <Route path='/' element={<Main />}>
                   <Route path='/' element={<Home />}></Route>
-                  <Route path='/menus' element={<PrivetRoute><Menus /></PrivetRoute>}></Route>
+                  <Route path='/menus' element={<Menus />}></Route>
                   <Route path='/our-shop' element={<OurShop />}></Route>
                   <Route path='/our-shop/:category' element={<OurShop />}></Route>
                 </Route>

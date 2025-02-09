@@ -3,17 +3,23 @@ import SectionTitle from "../../SharedLayout/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import { useState } from "react";
 // import './AddItem.css';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddItem = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [loading, setLoading] = useState(false);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
 
     // Item Data Upload Function.
     const onSubmit = async (data) => {
+        setLoading(true);
         console.log(data);
         // Store Image In Image BB And Get Image Link.
         const imageFile = { image: data.recipeImage[0] }
@@ -22,7 +28,35 @@ const AddItem = () => {
                 'Content-Type': 'multipart/form-data'
             }
         });
-        console.log(res.data);
+
+        if (res.data.success) {
+
+            // Store Item Data In Database.
+            const menuItem = {
+                name: data.recipeName,
+                recipe: data.recipeDetails,
+                image: res.data.data.image.url,
+                category: data.recipeCategory,
+                price: parseFloat(data.recipePrice)
+
+            };
+
+            // Call Server Api Using Axios.
+            const menuRes = await axiosSecure.post('/menus/addItem', menuItem);
+            // console.log(menuRes.data);
+            if (menuRes.data.insertedId) {
+                reset();
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: `${data.recipeName} Item Added Successfully`,
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+                setLoading(false);
+            };
+        }
+        // console.log(res.data);
     };
 
 
@@ -102,12 +136,17 @@ const AddItem = () => {
                         </div>
                         <div className="divider before:bg-[#151515] dark:before:bg-white after:bg-[#151515] dark:after:bg-white"></div>
                         <div className="flex justify-end">
-                            <button
-                                type="submit"
-                                className="flex items-center gap-4 font-Inter font-bold text-xl text-white px-6 py-3 rounded-lg bg-gradient-to-r from-[#835D23] to-[#B58130]">
-                                Add Item
-                                <FaUtensils />
-                            </button>
+                            {loading ?
+                                <div className="w-40 flex justify-center items-center gap-4 font-Inter font-bold text-xl text-white px-6 py-4 rounded-lg bg-gradient-to-r from-[#835D23] to-[#B58130]">
+                                    <span className="loading loading-spinner loading-md"></span>
+                                </div>
+                                :
+                                <button
+                                    type="submit"
+                                    className="flex items-center gap-4 font-Inter font-bold text-xl text-white px-6 py-3 rounded-lg bg-gradient-to-r from-[#835D23] to-[#B58130]">
+                                    Add Item
+                                    <FaUtensils />
+                                </button>}
                         </div>
                     </form>
                 </div>
