@@ -7,9 +7,10 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
 // import './AddItem.css';
-
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
+
 const AddItem = () => {
     const [loading, setLoading] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -91,7 +92,7 @@ const AddItem = () => {
                                 <select
                                     {...register("recipeCategory", { required: true })}
                                     className="uppercase h-full px-4 py-3 rounded-md border border-[#151515] focus:border-[#151515] dark:border-gray-500 dark:focus:border-gray-100 bg-transparent dark:bg-base-100 text-[#151515] dark:text-white font-Inter font-semibold text-lg outline-0 focus:outline-0 select">
-                                    <option className="uppercase" defaultValue={null} hidden>Category</option>
+                                    <option className="uppercase" value='' hidden>--Select an Category--</option>
                                     <option className="uppercase" value="salad">salad</option>
                                     <option className="uppercase" value="pizza">pizza</option>
                                     <option className="uppercase" value="soup">soup</option>

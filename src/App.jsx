@@ -25,6 +25,7 @@ import ManageItem from './Components/Layouts/Dashboard/ManageItem/ManageItem';
 import ManageBooking from './Components/Layouts/Dashboard/ManageBooking/ManageBooking';
 import AllUsers from './Components/Layouts/Dashboard/AllUsers/AllUsers';
 import AdminRoute from './AdminRoute/AdminRoute';
+import UpdateItem from './Components/Layouts/Dashboard/UpdateItem/UpdateItem';
 
 function App() {
   const queryClient = new QueryClient();
@@ -57,10 +58,11 @@ function App() {
                   <Route path='/our-shop' element={<OurShop />}></Route>
                   <Route path='/our-shop/:category' element={<OurShop />}></Route>
                 </Route>
-                <Route path='/dashboard' element={<PrivetRoute><Dashboard /></PrivetRoute>}>
+                <Route path='/dashboard' element={<Dashboard />}>
                   <Route path='/dashboard/admin-home' element={<AdminRoute><AdminHome /></AdminRoute>}></Route>
                   <Route path='/dashboard/add-item' element={<AdminRoute><AddItem /></AdminRoute>}></Route>
                   <Route path='/dashboard/manage-item' element={<AdminRoute><ManageItem /></AdminRoute>}></Route>
+                  <Route path='/dashboard/update-item/:title/:id' element={<AdminRoute><UpdateItem /></AdminRoute>}></Route>
                   <Route path='/dashboard/manage-booking' element={<AdminRoute><ManageBooking /></AdminRoute>}></Route>
                   <Route path='/dashboard/all-users' element={<AdminRoute><AllUsers /></AdminRoute>}></Route>
                   <Route path='/dashboard/home' element={<PrivetRoute><DashboardHome /></PrivetRoute>}></Route>
