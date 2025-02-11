@@ -1,4 +1,4 @@
-.react-tabs__tab--selected {
+.shop-tab-list .react-tabs__tab--selected {
     background-color: transparent;
     color: #BB8506;
     border-bottom: 4px solid #BB8506;

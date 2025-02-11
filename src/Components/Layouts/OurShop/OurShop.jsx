@@ -95,7 +95,7 @@ const OurShop = () => {
             <Cover bgImage={shopImg} title={"our shop"} subtitle={"would you like to try a dish?"} />
             <section>
                 <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-                    <TabList className="max-w-xl mx-auto px-2 flex justify-between items-center gap-8 my-20 overflow-x-auto">
+                    <TabList className="max-w-xl mx-auto px-2 flex justify-between items-center gap-8 my-20 overflow-x-auto shop-tab-list">
                         <Tab className="uppercase font-Inter font-bold text-2xl text-white border-b-4 border-b-transparent pb-2 cursor-pointer">Salad</Tab>
                         <Tab className="uppercase font-Inter font-bold text-2xl text-white border-b-4 border-b-transparent pb-2 cursor-pointer">Pizza</Tab>
                         <Tab className="uppercase font-Inter font-bold text-2xl text-white border-b-4 border-b-transparent pb-2 cursor-pointer">Soup</Tab>

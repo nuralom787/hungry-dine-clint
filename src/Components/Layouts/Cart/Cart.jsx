@@ -56,10 +56,17 @@ const Cart = () => {
                 <div className="flex justify-around items-center py-5 mt-6">
                     <h1 className="font-Cinzel font-bold text-3xl text-[#151515] dark:text-white">Total Orders: {cart.length}</h1>
                     <h1 className="font-Cinzel font-bold text-3xl text-[#151515] dark:text-white">Total Price: ${totalPrice.toFixed(2)}</h1>
-                    <Link className="font-Cinzel font-bold text-2xl text-white bg-[#D1A054] px-5 py-2 rounded-md cursor-pointer flex items-center gap-2" to={'/'}>Pay <FaArrowRight /></Link>
+                    {cart.length ?
+                        <Link
+                            className="font-Cinzel font-bold text-2xl text-white bg-[#D1A054B3] hover:bg-[#D1A054] duration-500 px-5 py-2 rounded-md cursor-pointer flex items-center gap-2"
+                            to={'/dashboard/cart/payment'}>
+                            Pay <FaArrowRight />
+                        </Link>
+                        :
+                        ""
+                    }
                 </div>
                 <div className="overflow-x-auto bg-gray-200 dark:bg-base-100 rounded-xl p-8 mb-8">
-                    {/* <h1 className="uppercase font-Inter font-extrabold text-start text-2xl text-[#151515] dark:text-white pb-3 mb-3 border-b-2 border-b-[#151515] dark:border-b-white">my cart</h1> */}
                     {isPending ?
                         <div className="flex items-center gap-1">
                             <div className="skeleton w-1/6 h-6 my-8"></div>
@@ -90,6 +97,13 @@ const Cart = () => {
                                 }
                             </tbody>
                         </table>
+                    }
+                    {cart.length ?
+                        ""
+                        :
+                        <div className="text-center my-20">
+                            <h1 className="font-Inter font-bold text-[#151515] dark:text-white text-3xl uppercase">Your Cart Is Empty!!</h1>
+                        </div>
                     }
                 </div>
                 {/* <div className="w-2/5 bg-gray-200 dark:bg-base-100 rounded-xl p-8">

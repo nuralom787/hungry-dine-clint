@@ -1,0 +1,12 @@
+.payment-tab-list .react-tabs__tab--selected {
+    border-radius: 8px;
+}
+
+.payment-tab-list .react-tabs__tab {
+    border-radius: 8px;
+}
+
+
+.payment-tab-list .react-tabs__tab--selected::after {
+    background: none;
+}
