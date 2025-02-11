@@ -16,6 +16,18 @@ const AddItem = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
+    const [upImg, setUpImg] = useState("");
+
+
+    // Preview Image Before Upload.
+    const PreviewImg = (e) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onloadend = () => {
+            const imageData = reader.result.split(",")[1];
+            setUpImg(imageData);
+        };
+    };
 
 
     // Item Data Upload Function.
@@ -130,10 +142,14 @@ const AddItem = () => {
                         <div className="mt-6 relative">
                             <input
                                 {...register("recipeImage", { required: true })}
+                                onChange={e => PreviewImg(e)}
                                 type="file"
                                 className="file-input file-input-bordered w-full max-w-xs"
                             />
                             {errors.recipeImage && <p className="text-red-700 font-Inter font-semibold" role="alert">{"This field id required *"}</p>}
+                        </div>
+                        <div className='w-40 mt-4'>
+                            {upImg && <img className='rounded-lg' src={`data:image/*;base64,${upImg}`} alt="" id='ProfileImg' />}
                         </div>
                         <div className="divider before:bg-[#151515] dark:before:bg-white after:bg-[#151515] dark:after:bg-white"></div>
                         <div className="flex justify-end">

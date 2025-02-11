@@ -62,7 +62,7 @@ function App() {
                   <Route path='/dashboard/admin-home' element={<AdminRoute><AdminHome /></AdminRoute>}></Route>
                   <Route path='/dashboard/add-item' element={<AdminRoute><AddItem /></AdminRoute>}></Route>
                   <Route path='/dashboard/manage-item' element={<AdminRoute><ManageItem /></AdminRoute>}></Route>
-                  <Route path='/dashboard/update-item/:title/:id' element={<AdminRoute><UpdateItem /></AdminRoute>}></Route>
+                  <Route path='/dashboard/manage-item/update-item/:title/:id' element={<AdminRoute><UpdateItem /></AdminRoute>}></Route>
                   <Route path='/dashboard/manage-booking' element={<AdminRoute><ManageBooking /></AdminRoute>}></Route>
                   <Route path='/dashboard/all-users' element={<AdminRoute><AllUsers /></AdminRoute>}></Route>
                   <Route path='/dashboard/home' element={<PrivetRoute><DashboardHome /></PrivetRoute>}></Route>

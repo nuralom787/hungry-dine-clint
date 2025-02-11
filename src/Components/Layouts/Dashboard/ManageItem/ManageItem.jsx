@@ -89,7 +89,7 @@ const ManageItem = () => {
                                             <p>${menu.price.toFixed(2)}</p>
                                         </td>
                                         <td className="flex justify-center font-Inter font-semibold text-[#151515] dark:text-white">
-                                            <Link to={`/dashboard/update-item/${menu.name}/${menu._id}`} className="bg-green-600 p-4 rounded-md block w-fit"><FaRegEdit className="text-white text-2xl" /></Link>
+                                            <Link to={`/dashboard/manage-item/update-item/${menu.name}/${menu._id}`} className="bg-green-600 p-4 m-1 rounded-md block w-fit"><FaRegEdit className="text-white text-2xl" /></Link>
                                         </td>
                                         <td className="text-center font-Inter font-semibold text-[#151515] dark:text-white">
                                             <button onClick={() => handleDelete(menu)} className="bg-red-600 p-4 rounded-md"><FaTrashAlt className="text-white text-2xl" /></button>
