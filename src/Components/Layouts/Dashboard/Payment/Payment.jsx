@@ -7,13 +7,15 @@ import './Payment.css';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import PaymentForm from "./PaymentForm";
+import useCart from "../../../../Hooks/useCart";
 const stripe_pk = import.meta.env.VITE_STRIPE_PUBLISH_KEY;
 const stripePromise = loadStripe(stripe_pk);
 
 
 const Payment = () => {
     const [tabIndex, setTabIndex] = useState("Card");
-
+    const [cart] = useCart();
+    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
     return (
         <section className="min-h-screen px-10 bg-gray-300 dark:bg-base-300">
@@ -23,6 +25,9 @@ const Payment = () => {
                 </Helmet>
                 <div className="text-center">
                     <h1 className="uppercase font-Inter font-bold text-4xl text-[#151515] dark:text-white my-10">Payment</h1>
+                </div>
+                <div className="text-center my-4">
+                    <h1 className="font-Inter text-2xl text-[#151515] dark:text-white">Total Payable Amount: <span className="font-bold">${totalPrice.toFixed(2)}</span></h1>
                 </div>
                 <div>
                     <fieldset className="border-2 border-gray-700 dark:border-white py-8 px-4 rounded-lg">
