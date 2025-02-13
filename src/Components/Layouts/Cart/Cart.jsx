@@ -48,12 +48,12 @@ const Cart = () => {
 
 
     return (
-        <section className="min-h-screen px-10 bg-gray-300 dark:bg-base-300">
+        <section className="min-h-screen px-2 md:px-10 mt-4 md:mt-0 rounded-t-xl md:rounded-none bg-gray-300 dark:bg-base-300">
             <Helmet>
                 <title>Hungry Dine | Cart</title>
             </Helmet>
             <section className="max-h-screen overflow-y-auto">
-                <div className="flex justify-around items-center py-5 mt-6">
+                <div className="flex flex-col md:flex-row justify-around items-center gap-3 md:gap-0 py-5 mt-6">
                     <h1 className="font-Cinzel font-bold text-3xl text-[#151515] dark:text-white">Total Orders: {cart.length}</h1>
                     <h1 className="font-Cinzel font-bold text-3xl text-[#151515] dark:text-white">Total Price: ${totalPrice.toFixed(2)}</h1>
                     {cart.length ?
@@ -75,14 +75,14 @@ const Cart = () => {
                             <div className="skeleton w-1/6 h-6 my-8"></div>
                         </div>
                         :
-                        <table className="table">
+                        <table className="table static">
                             <thead>
                                 <tr className="bg-base-content dark:bg-base-300">
                                     <th className="font-Inter text-[#151515] dark:text-white">SI <IoIosArrowDown className="inline-flex" /></th>
                                     <th className="font-Inter text-[#151515] dark:text-white">ITEM IMAGE<IoIosArrowDown className="inline-flex" /></th>
                                     <th className="font-Inter text-[#151515] dark:text-white">ITEM NAME <IoIosArrowDown className="inline-flex" /></th>
                                     <th className="font-Inter text-[#151515] dark:text-white">PRICE <IoIosArrowDown className="inline-flex" /></th>
-                                    <th className="font-Inter text-[#151515] dark:text-white">ACTION <IoIosArrowDown className="inline-flex" /></th>
+                                    <th className="font-Inter text-[#151515] dark:text-white text-center">ACTION <IoIosArrowDown className="inline-flex" /></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -92,7 +92,7 @@ const Cart = () => {
                                         <td className="font-Inter font-semibold text-[#151515] dark:text-white"><img className="w-20 rounded-lg" src={item.image} alt="" /></td>
                                         <td className="font-Inter font-semibold text-[#151515] dark:text-white"><Link className="hover:underline" to={'/'}><h1>{item.name}</h1></Link></td>
                                         <td className="font-Inter font-semibold text-[#151515] dark:text-white"><p>${item.price.toFixed(2)}</p></td>
-                                        <td className="font-Inter font-semibold text-[#151515] dark:text-white"><button onClick={() => handleDelete(item._id)} className="bg-red-600 p-2 rounded-md"><FaTrashAlt className="text-white text-2xl" /></button></td>
+                                        <td className="font-Inter font-semibold text-[#151515] dark:text-white text-center"><button onClick={() => handleDelete(item._id)} className="bg-red-600 p-2 rounded-md"><FaTrashAlt className="text-white text-2xl" /></button></td>
                                     </tr>)
                                 }
                             </tbody>
