@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useCart from "../../../../Hooks/useCart";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const PaymentForm = () => {
     const [loading, setLoading] = useState(false);
@@ -12,6 +13,7 @@ const PaymentForm = () => {
     const [clientSecret, setClientSecret] = useState("");
     const [transactionID, setTransactionID] = useState("");
     const [cart, refetch] = useCart();
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
@@ -100,6 +102,7 @@ const PaymentForm = () => {
                     });
                     refetch();
                     setLoading(false);
+                    navigate("/dashboard/payment-history");
                 };
             }
         }

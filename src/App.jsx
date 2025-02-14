@@ -27,6 +27,7 @@ import AllUsers from './Components/Layouts/Dashboard/AllUsers/AllUsers';
 import AdminRoute from './AdminRoute/AdminRoute';
 import UpdateItem from './Components/Layouts/Dashboard/UpdateItem/UpdateItem';
 import Payment from './Components/Layouts/Dashboard/Payment/Payment';
+import Invoice from './Components/Layouts/Dashboard/Invoice/Invoice';
 
 function App() {
   const queryClient = new QueryClient();
@@ -73,6 +74,7 @@ function App() {
                   <Route path='/dashboard/review' element={<PrivetRoute><Review /></PrivetRoute>}></Route>
                   <Route path='/dashboard/booking' element={<PrivetRoute><Bookings /></PrivetRoute>}></Route>
                   <Route path='/dashboard/cart/payment' element={<PrivetRoute><Payment /></PrivetRoute>}></Route>
+                  <Route path='/dashboard/invoice/:email/:trId' element={<PrivetRoute><Invoice /></PrivetRoute>}></Route>
                 </Route>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/register' element={<Register />}></Route>

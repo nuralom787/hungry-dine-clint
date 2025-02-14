@@ -7,19 +7,10 @@ import SectionTitle from '../../SharedLayout/SectionTitle/SectionTitle';
 import { IoIosArrowDown } from 'react-icons/io';
 import { FaFileInvoice } from 'react-icons/fa';
 import { Link } from 'react-router';
+import usePayments from '../../../../Hooks/usePayments';
 
 const PaymentHistory = () => {
-    const axiosSecure = useAxiosSecure();
-    const { user } = useContext(AuthContext);
-
-    const { data: payments, refetch, isPending } = useQuery({
-        queryKey: ["payments"],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/user/payment-history?email=${user?.email}`);
-            return res.data;
-        }
-    });
-    console.log(payments)
+    const [payments, refetch, isPending] = usePayments();
 
 
     return (
@@ -47,9 +38,9 @@ const PaymentHistory = () => {
                                     <tr className="bg-base-content dark:bg-base-300">
                                         <th className="font-Inter text-[#151515] dark:text-white">SI <IoIosArrowDown className="inline-flex" /></th>
                                         <th className="font-Inter text-[#151515] dark:text-white">Email<IoIosArrowDown className="inline-flex" /></th>
-                                        <th className="font-Inter text-[#151515] dark:text-white">Category <IoIosArrowDown className="inline-flex" /></th>
-                                        <th className="font-Inter text-[#151515] dark:text-white text-end">Total PRICE <IoIosArrowDown className="inline-flex" /></th>
-                                        <th className="font-Inter text-[#151515] dark:text-white text-end">Paying Date <IoIosArrowDown className="inline-flex" /></th>
+                                        <th className="font-Inter text-[#151515] dark:text-white">Total Price <IoIosArrowDown className="inline-flex" /></th>
+                                        <th className="font-Inter text-[#151515] dark:text-white">Paying Date <IoIosArrowDown className="inline-flex" /></th>
+                                        <th className="font-Inter text-[#151515] dark:text-white text-center">Status <IoIosArrowDown className="inline-flex" /></th>
                                         <th className="font-Inter text-[#151515] dark:text-white text-center">ACTION <IoIosArrowDown className="inline-flex" /></th>
                                     </tr>
                                 </thead>
@@ -58,11 +49,17 @@ const PaymentHistory = () => {
                                         payments.map((payment, idx) => <tr key={payment._id} className="border-t border-b-base-300 dark:border-b-white my-6">
                                             <th className="font-Inter font-semibold text-[#151515] dark:text-white"><p>{idx + 1}</p></th>
                                             <td className="font-Inter font-semibold text-[#151515] dark:text-white"><p>{payment.email}</p></td>
-                                            <td className="font-Inter font-semibold text-[#151515] dark:text-white"><p>Food</p></td>
-                                            <td className="font-Inter font-semibold text-[#151515] dark:text-white text-end"><p>${payment.price.toFixed(2)}</p></td>
-                                            <td className="font-Inter font-semibold text-[#151515] dark:text-white text-end"><p>{new Date().toDateString(payment.date)}</p></td>
+                                            <td className="font-Inter font-semibold text-[#151515] dark:text-white"><p>${payment.price.toFixed(2)}</p></td>
+                                            <td className="font-Inter font-semibold text-[#151515] dark:text-white"><p>{new Date().toDateString(payment.date)}</p></td>
+                                            <td className="font-Inter font-semibold text-[#151515] dark:text-white capitalize">
+                                                {payment.status === "pending" && <p className='p-1 rounded-full text-center text-yellow-600 bg-yellow-100 dark:text-white dark:bg-yellow-600'>{payment.status}</p>}
+                                                {payment.status === "processing" && <p className='p-1 rounded-full text-center text-blue-800 bg-blue-100 dark:text-white dark:bg-blue-800'>{payment.status}</p>}
+                                                {payment.status === "on-the-way" && <p className='p-1 rounded-full text-center text-cyan-600 bg-cyan-100 dark:text-white dark:bg-cyan-600'>{payment.status}</p>}
+                                                {payment.status === "delivered" && <p className='p-1 rounded-full text-center text-green-800 bg-green-100 dark:text-white dark:bg-green-800'>{payment.status}</p>}
+                                                {payment.status === "cancel" && <p className='p-1 rounded-full text-center text-red-600 bg-red-100 dark:text-white dark:bg-red-600'>{payment.status}</p>}
+                                            </td>
                                             <td className="font-Inter font-semibold text-[#151515] dark:text-white flex justify-center">
-                                                <Link to="/" className="bg-green-500 p-2 rounded-md block w-fit tooltip" data-tip="View Invoice">
+                                                <Link to={`/dashboard/invoice/${payment.email}/${payment.transactionID}`} className="bg-green-500 p-2 rounded-md block w-fit tooltip" data-tip="View Invoice">
                                                     <FaFileInvoice className="text-white text-2xl" />
                                                 </Link>
                                             </td>
