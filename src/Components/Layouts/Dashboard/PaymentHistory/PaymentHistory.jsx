@@ -59,7 +59,7 @@ const PaymentHistory = () => {
                                                 {payment.status === "cancel" && <p className='p-1 rounded-full text-center text-red-600 bg-red-100 dark:text-white dark:bg-red-600'>{payment.status}</p>}
                                             </td>
                                             <td className="font-Inter font-semibold text-[#151515] dark:text-white flex justify-center">
-                                                <Link to={`/dashboard/invoice/${payment.email}/${payment.transactionID}`} className="bg-green-500 p-2 rounded-md block w-fit tooltip" data-tip="View Invoice">
+                                                <Link to={`/dashboard/invoice/${payment.email}/${payment._id}`} className="bg-green-500 p-2 rounded-md block w-fit tooltip" data-tip="View Invoice">
                                                     <FaFileInvoice className="text-white text-2xl" />
                                                 </Link>
                                             </td>
