@@ -8,7 +8,7 @@ const usePayments = () => {
     const { user } = useContext(AuthContext);
 
     const { data: payments, refetch, isPending } = useQuery({
-        queryKey: ["payments"],
+        queryKey: ["payments", user.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/user/payment-history?email=${user?.email}`);
             return res.data;
