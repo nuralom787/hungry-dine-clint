@@ -13,7 +13,7 @@ import AuthProvider from './Providers/AuthProvider'
 import PrivetRoute from './PrivetRoute/PrivetRoute'
 import Cart from './Components/Layouts/Cart/Cart';
 import Dashboard from './Components/Layouts/Dashboard/Dashboard/Dashboard';
-import DashboardHome from './Components/Layouts/Dashboard/DashboardHome/DashboardHome';
+import UserHome from './Components/Layouts/Dashboard/UserHome/UserHome';
 import Reservation from './Components/Layouts/Dashboard/Reservation/Reservation';
 import PaymentHistory from './Components/Layouts/Dashboard/PaymentHistory/PaymentHistory';
 import Review from './Components/Layouts/Dashboard/Review/Review';
@@ -67,7 +67,7 @@ function App() {
                   <Route path='/dashboard/manage-item/update-item/:title/:id' element={<AdminRoute><UpdateItem /></AdminRoute>}></Route>
                   <Route path='/dashboard/manage-booking' element={<AdminRoute><ManageBooking /></AdminRoute>}></Route>
                   <Route path='/dashboard/all-users' element={<AdminRoute><AllUsers /></AdminRoute>}></Route>
-                  <Route path='/dashboard/home' element={<PrivetRoute><DashboardHome /></PrivetRoute>}></Route>
+                  <Route path='/dashboard/home' element={<PrivetRoute><UserHome /></PrivetRoute>}></Route>
                   <Route path='/dashboard/reservation' element={<PrivetRoute><Reservation /></PrivetRoute>}></Route>
                   <Route path='/dashboard/payment-history' element={<PrivetRoute><PaymentHistory /></PrivetRoute>}></Route>
                   <Route path='/dashboard/cart' element={<PrivetRoute><Cart /></PrivetRoute>}></Route>

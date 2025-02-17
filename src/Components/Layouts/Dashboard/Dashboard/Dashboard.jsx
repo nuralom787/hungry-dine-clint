@@ -8,6 +8,7 @@ import { HiMenu } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";
 import './Dashboard.css';
 import useAdmin from '../../../../Hooks/useAdmin';
+import logo from '../../../../assets/logo-with-name-black.png';
 
 
 const Dashboard = () => {
@@ -24,7 +25,9 @@ const Dashboard = () => {
     return (
         <section className='max-w-7xl mx-auto px-2'>
             <section className='md:flex relative'>
-                <div className='md:w-2/6 lg:w-1/4 min-h-screen bg-[#D1A054] absolute md:static -left-80 md:-left-0'>
+                <div className='max-h-screen overflow-y-auto md:w-2/6 lg:w-1/4 min-h-screen bg-[#D1A054] absolute md:static -left-80 md:-left-0'>
+                    <img className='pt-10 px-10' src={logo} alt="" />
+                    <div className='divider before:bg-white after:bg-white'></div>
                     {adminLoading ?
                         <div className='space-y-4 mt-6 px-4'>
                             <div className="skeleton h-8 w-full"></div>
