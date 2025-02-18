@@ -8,7 +8,7 @@ import { HiMenu } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";
 import './Dashboard.css';
 import useAdmin from '../../../../Hooks/useAdmin';
-import logo from '../../../../assets/logo-with-name-black.png';
+import logo from '../../../../assets/logo-with-name-white.png';
 
 
 const Dashboard = () => {
@@ -26,7 +26,7 @@ const Dashboard = () => {
         <section className='max-w-7xl mx-auto px-2'>
             <section className='md:flex relative'>
                 <div className='max-h-screen overflow-y-auto md:w-2/6 lg:w-1/4 min-h-screen bg-[#D1A054] absolute md:static -left-80 md:-left-0'>
-                    <img className='pt-10 px-10' src={logo} alt="" />
+                    <img className='pt-10 px-4 hidden md:block' src={logo} alt="" />
                     <div className='divider before:bg-white after:bg-white'></div>
                     {adminLoading ?
                         <div className='space-y-4 mt-6 px-4'>
@@ -110,7 +110,7 @@ const Dashboard = () => {
                                     <label
                                         htmlFor="my-drawer"
                                         aria-label="close sidebar"
-                                        className="absolute right-3 top-3 text-red-600 bg-white rounded-full p-1">
+                                        className="absolute left-2 top-2 text-red-600 bg-white rounded-full p-1">
                                         <svg
                                             className="swap-on fill-current"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -121,6 +121,8 @@ const Dashboard = () => {
                                                 points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
                                         </svg>
                                     </label>
+                                    <img className='pt-10 px-4 block md:hidden' src={logo} alt="" />
+                                    <div className='divider before:bg-white after:bg-white'></div>
                                     {adminLoading ?
                                         <div className='space-y-4 mt-6 px-4'>
                                             <div className="skeleton h-8 w-full"></div>
