@@ -24,7 +24,7 @@ const AdminHome = () => {
     });
 
 
-    // Load Admin Statistic Data.
+    // Load Admin Graph-Statistic Data.
     const { data: order_stats, refetch: refetch2, isPending: isPending2 } = useQuery({
         queryKey: ["graph-statistics"],
         queryFn: async () => {
@@ -119,51 +119,60 @@ const AdminHome = () => {
                     </div>
                 }
                 <div className="divider before:bg-[#151515] dark:before:bg-white after:bg-[#151515] dark:after:bg-white"></div>
-                <div className="flex items-baseline">
-                    <div className="w-1/2">
-                        <BarChart
-                            width={440}
-                            height={400}
-                            data={order_stats}
-                            margin={{
-                                top: 20,
-                                right: 10,
-                                left: -15,
-                                bottom: 0,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray="3 2" />
-                            <XAxis dataKey="category" />
-                            <YAxis />
-                            <Bar dataKey="quantity" fill="#8884d8" shape={<TriangleBar />} label={{ position: 'top' }}>
-                                {order_stats?.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={colors[index % 20]} />
-                                ))}
-                            </Bar>
-                            <Tooltip />
-                        </BarChart>
+                {isPending2 ?
+                    <div className="bg-base-200 p-2 rounded-xl grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="skeleton h-96 w-full"></div>
+                        <div className="skeleton h-96 w-full"></div>
                     </div>
-                    <div className="w-1/2">
-                        <PieChart width={440} height={400}>
-                            <Pie
-                                data={paiChartData}
-                                cx="50%"
-                                cy="50%"
-                                labelLine={false}
-                                label={renderCustomizedLabel}
-                                outerRadius={100}
-                                fill="#8884d8"
-                                dataKey="value"
-                            >
-                                {paiChartData?.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
-                                ))}
-                            </Pie>
-                            <Legend></Legend>
-                            <Tooltip />
-                        </PieChart>
+                    :
+                    <div className="flex flex-col lg:flex-row items-baseline mb-16">
+                        <div className="w-full lg:w-1/2 h-[400px] mx-auto">
+                            <ResponsiveContainer>
+                                <BarChart
+                                    data={order_stats}
+                                    margin={{
+                                        top: 20,
+                                        right: 10,
+                                        left: -15,
+                                        bottom: 0,
+                                    }}
+                                >
+                                    <CartesianGrid strokeDasharray="3 2" />
+                                    <XAxis dataKey="category" />
+                                    <YAxis />
+                                    <Bar dataKey="quantity" fill="red" shape={<TriangleBar />} label={{ position: 'top' }}>
+                                        {order_stats?.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+                                        ))}
+                                    </Bar>
+                                    <Tooltip />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                        <div className="w-full lg:w-1/2 h-[400px] mx-auto">
+                            <ResponsiveContainer>
+                                <PieChart>
+                                    <Pie
+                                        data={paiChartData}
+                                        cx="50%"
+                                        cy="50%"
+                                        labelLine={false}
+                                        label={renderCustomizedLabel}
+                                        outerRadius={100}
+                                        fill="#8884d8"
+                                        dataKey="value"
+                                    >
+                                        {paiChartData?.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                                        ))}
+                                    </Pie>
+                                    <Legend></Legend>
+                                    <Tooltip />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
-                </div>
+                }
             </section>
         </section>
     );
