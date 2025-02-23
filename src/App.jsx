@@ -28,6 +28,7 @@ import AdminRoute from './AdminRoute/AdminRoute';
 import UpdateItem from './Components/Layouts/Dashboard/UpdateItem/UpdateItem';
 import Payment from './Components/Layouts/Dashboard/Payment/Payment';
 import Invoice from './Components/Layouts/Dashboard/Invoice/Invoice';
+import Contact from './Components/Layouts/Contact/Contact';
 
 function App() {
   const queryClient = new QueryClient();
@@ -56,6 +57,7 @@ function App() {
               <Routes>
                 <Route path='/' element={<Main />}>
                   <Route path='/' element={<Home />}></Route>
+                  <Route path='/contact' element={<Contact />}></Route>
                   <Route path='/menus' element={<Menus />}></Route>
                   <Route path='/our-shop' element={<OurShop />}></Route>
                   <Route path='/our-shop/:category' element={<OurShop />}></Route>
